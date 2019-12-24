@@ -1,0 +1,50 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.0</TargetFramework>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <GenerateSerializationAssemblies>Auto</GenerateSerializationAssemblies>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Remove="Resources\Controllers.HomeController.tr-TR.resx" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation" Version="3.0.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Session" Version="2.2.0" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="3.0.0" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="3.0.0" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="3.0.0">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="Microsoft.Extensions.Localization" Version="3.0.0" />
+    <PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="3.0.0" />
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="3.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Areas\Admin\Data\" />
+    <Folder Include="Areas\Admin\Models\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="wwwroot\admin\assets\js\bootstrap-alert.js" />
+    <None Include="wwwroot\admin\assets\js\bootstrap-button.js" />
+    <None Include="wwwroot\admin\assets\js\bootstrap-carousel.js" />
+    <None Include="wwwroot\admin\assets\js\bootstrap-collapse.js" />
+    <None Include="wwwroot\admin\assets\js\bootstrap-dropdown.js" />
+    <None Include="wwwroot\admin\assets\js\bootstrap-modal.js" />
+    <None Include="wwwroot\admin\assets\js\bootstrap-popover.js" />
+    <None Include="wwwroot\admin\assets\js\bootstrap-scrollspy.js" />
+    <None Include="wwwroot\admin\assets\js\bootstrap-tab.js" />
+    <None Include="wwwroot\admin\assets\js\bootstrap-tooltip.js" />
+    <None Include="wwwroot\admin\assets\js\bootstrap-transition.js" />
+    <None Include="wwwroot\admin\assets\js\bootstrap-typeahead.js" />
+    <None Include="wwwroot\admin\assets\js\jquery.js" />
+  </ItemGroup>
+
+</Project>

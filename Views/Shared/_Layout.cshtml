@@ -1,0 +1,128 @@
+﻿@using Microsoft.AspNetCore.Http
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+
+    <title>@ViewData["Title"] - WebApplication1</title>
+
+    <!-- Google font -->
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:300,600" rel="stylesheet">
+
+    <!-- Bootstrap -->
+    <link type="text/css" rel="stylesheet" href="/css/bootstrap.min.css" />
+
+    <!-- Custom stlylesheet -->
+    <link type="text/css" rel="stylesheet" href="/css/style.css" />
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+          <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+          <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+        <![endif]-->
+    <style>
+        .ulNavigation li {
+            display: inline-block;
+            background-color: #337ab7;
+            padding: 10px;
+            color:#fff;
+        }
+        .ulNavigation li a {
+            color:#fff !important;
+            font-size:15px;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="booking" class="section">
+        <div class="section-center">
+            <div class="container">
+                <ul class="ulNavigation">
+                    <li><a href="/">Ana Sayfa</a></li>
+                    <li><a href="/rezervasyon">Rezervasyon Yap</a></li>
+                    @if (Context.Session.GetInt32("UserID") == null)
+                    {
+                        <li><a asp-action="Index" asp-controller="Login"><span class="icon-envelope"></span> @Lang("SignIn")</a></li>
+                        <li><a asp-action="Index" asp-controller="Register"><span class="icon-envelope"></span> @Lang("SignUp")</a></li>
+                    }
+                    else
+                    {
+                        if (Context.Session.GetInt32("UserRole") == (int)WebApplication1.Helpers.Enums.UserRole.Admin)
+                        {
+                            <li><a href="/admin">Admin Paneli</a></li>
+                        }
+                        <li><span>@Context.Session.GetString("UserEmail")</span></li>
+                        <li><a href="/rezervasyon/rezervasyonlarim">Rezervasyonlarım</a></li>
+                        <li><a asp-action="SignOut" asp-controller="Login"><span class="icon-envelope"></span> @Lang("SignOut")</a></li>
+                        <li><a href="/rezervasyon">Giriş Yap</a></li>
+                    }
+                    <li>
+                        <select class="selLanguage" style="color:#000">
+                            <option value="">@Lang("SelectLanguage")</option>
+                            <option value="TR">Türkçe</option>
+                            <option value="EN">English</option>
+                        </select>
+                    </li>
+                </ul>
+            </div>
+            <div class="container">
+                <div class="row">
+                    <div class="booking-form">
+                        @RenderBody()
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="/js/jquery.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function(){
+            var lang = readCookie("Lang");
+            if(lang != null)
+               $(".selLanguage").val(lang);
+        });
+$(".selLanguage").change(function () {
+        if($(this).val() != null) {
+        	createCookie("Lang", $(this).val(), 1);
+            location.reload();
+        }
+});
+
+function createCookie(name,value,days) {
+    if (days) {
+        var date = new Date();
+        date.setTime(date.getTime() + (days * 24 * 60 * 60 *1000));
+        var expires = "; expires=" + date.toGMTString();
+    } else {
+        var expires = "";
+    }
+    document.cookie = name + "=" + value + expires + "; path=/";
+}
+
+function readCookie(name) {
+    var nameEQ = name + "=";
+    var ca = document.cookie.split(';');
+    for(var i=0;i < ca.length;i++) {
+        var c = ca[i];
+        while (c.charAt(0)==' ') {
+            c = c.substring(1,c.length);
+        }
+        if (c.indexOf(nameEQ) == 0) {
+            return c.substring(nameEQ.length,c.length);
+        }
+    }
+    return null;
+}
+
+function eraseCookie(name) {
+    createCookie(name,"",-1);
+}
+    </script>
+</body><!-- This templates was made by Colorlib (https://colorlib.com) -->
+
+</html>

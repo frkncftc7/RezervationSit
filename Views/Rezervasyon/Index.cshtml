@@ -1,0 +1,59 @@
+﻿@using ReservationSite.Data
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<form method="post">
+    <div class="col-md-8">
+        <div class="form-group">
+            <select name="OtelID" class="form-control" required>
+                <option value="">Otel Seçiniz</option>
+                @foreach (Oteller i in ViewBag.Oteller)
+                {
+                    <option value="@i.Id">@i.OtelAdi</option>
+                }
+            </select>
+            <span class="form-label">Destination</span>
+        </div>
+    </div>
+    <div class="col-md-2">
+        <div class="form-group">
+            <select name="KisiSayisi" class="form-control">
+                <option>1</option>
+                <option>2</option>
+                <option>3</option>
+            </select>
+            <span class="select-arrow"></span>
+            <span class="form-label">Kişi Sayısı</span>
+        </div>
+    </div>
+    <div class="col-md-2">
+        <div class="form-group">
+            <select name="CocukSayisi" class="form-control">
+                <option>0</option>
+                <option>1</option>
+                <option>2</option>
+            </select>
+            <span class="select-arrow"></span>
+            <span class="form-label">Çocuklar</span>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="form-group">
+            <input name="Baslangic" class="form-control" type="date" required>
+            <span class="form-label">Başlangıç</span>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="form-group">
+            <input name="Bitis" class="form-control" type="date" required>
+            <span class="form-label">Bitiş</span>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="form-btn">
+            <button class="submit-btn">Rezervasyon Yap</button>
+        </div>
+    </div>
+</form>

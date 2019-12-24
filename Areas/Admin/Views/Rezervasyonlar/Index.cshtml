@@ -1,0 +1,40 @@
+﻿@using ReservationSite.Data
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Rezervasyonlar</h1>
+
+<div class="table-responsive">
+    <table class="table table-striped table-sm">
+        <thead>
+            <tr>
+                <th>Rezervasyon No</th>
+                <th>Otel Adı</th>
+                <th>Kullanıcı Adı</th>
+                <th>Başlangıç</th>
+                <th>Bitiş</th>
+                <th>Kişi Sayısı</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (Rezervasyonlar i in ViewBag.Rezervasyonlar)
+            {
+            <tr>
+                <td>@i.Id</td>
+                <td>@i.Otel.OtelAdi</td>
+                <td>@i.Kullanici.Name @i.Kullanici.Lastname</td>
+                <td>@i.BaslangicTarih.Value.ToShortDateString()</td>
+                <td>@i.SonTarih.Value.ToShortDateString()</td>
+                <td>@i.KisiSayisi</td>
+                <td>
+                    <a href="/Admin/Rezervasyonlar/Delete/@i.Id" class="btn btn-danger btn-sm">Sil</a>
+                </td>
+            </tr>
+            }
+
+        </tbody>
+    </table>
+</div>
